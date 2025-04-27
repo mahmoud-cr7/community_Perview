@@ -46,7 +46,7 @@ const ProfileCard = () => {
 
   const getInputClass = (field) => (errors[field] ? "input-error" : "");
   return (
-    <div className="profile-card ">
+    <div className="profile-card container">
       <div className="profile-header container">
         <img src={AhmedSaad} alt="Profile" className="profile-image" />
         <div className="profile-info">

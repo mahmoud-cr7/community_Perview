@@ -11,8 +11,8 @@ const Home = () => {
    navigate("/profile");
  };
   return (
-    <div className="home">
-      <div className="header container">
+    <div className="home container">
+      <div className="header ">
         <div className="logo">
           <img src={aiPng} alt="" />
         </div>
@@ -22,7 +22,7 @@ const Home = () => {
         </div>
       </div>
       <span className="line"></span>
-      <div className="category container">
+      <div className="category ">
         <div className="grid">
           <div className="column">
             <div className="item">
