@@ -156,6 +156,10 @@
   margin: 20px 0;
   display: block;
 }
+.input-error {
+  border: 1px solid red !important;
+  outline: none;
+}
 @media (max-width: 768px) {
   .profile-header {
     flex-direction: column;

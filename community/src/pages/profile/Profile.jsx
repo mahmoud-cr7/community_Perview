@@ -1,9 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "./profile.css";
 import AhmedSaad from "../../assets/avatar.png";
 import messageIcon from "../../assets/duo-icons_message.png";
 
 const ProfileCard = () => {
+  const [occupation, setOccupation] = useState("");
+  const [skills, setSkills] = useState("");
+  const [dob, setDob] = useState("");
+
+  const [errors, setErrors] = useState({
+    occupation: "",
+    skills: "",
+    dob: "",
+  });
+
+  const handleSendMessage = () => {
+    const newErrors = {
+      occupation: occupation.trim() ? "" : "Occupation is required.",
+      skills: skills.trim() ? "" : "Skills are required.",
+      dob: dob ? "" : "Date of birth is required.",
+    };
+
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) return;
+
+    console.log("Message sent successfully!");
+  };
+
+  const handleInputChange = (field, value) => {
+    // Update the value
+    if (field === "occupation") setOccupation(value);
+    if (field === "skills") setSkills(value);
+    if (field === "dob") setDob(value);
+
+    // Clear error for this input if user starts typing
+    if (errors[field]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: "",
+      }));
+    }
+  };
+
+  const getInputClass = (field) => (errors[field] ? "input-error" : "");
   return (
     <div className="profile-card ">
       <div className="profile-header container">
@@ -18,7 +59,7 @@ const ProfileCard = () => {
       <span className="line"></span>
 
       <div className="action-buttons container">
-        <button className="btn message">
+        <button className="btn message" onClick={handleSendMessage}>
           <span>Send Message</span>
           <img src={messageIcon} alt="Message Icon" className="message-icon" />
         </button>
@@ -46,33 +87,55 @@ const ProfileCard = () => {
         <div className="details-input">
           <h3>Education/Occupation</h3>
           <input
+            className={getInputClass("occupation")}
+            value={occupation}
             type="text"
             name="occupation"
             id="occupation"
+            onChange={(e) => handleInputChange("occupation", e.target.value)}
             // value="MIS, AI Developer and Researcher"
             placeholder="MIS, AI Developer and Researcher"
           />
+          {errors.occupation && (
+            <span style={{ color: "red", fontSize: "14px" }}>
+              {errors.occupation}
+            </span>
+          )}
         </div>
         <div className="details-input">
           <h3>Skills/Expertise</h3>
           <input
+            className={getInputClass("skills")}
+            value={skills}
             type="text"
             name="skills"
             id="skills"
             // value="Data Science, Programming, AI"
+            onChange={(e) => handleInputChange("skills", e.target.value)}
             placeholder="Data Science, Programming, AI"
           />
+          {errors.skills && (
+            <span style={{ color: "red", fontSize: "14px" }}>
+              {errors.skills}
+            </span>
+          )}
         </div>
 
         <div className="details-input">
           <h3>Date of Birth</h3>
           <input
+            className={getInputClass("dob")}
+            value={dob}
             type="date"
             name="dob"
             id="dob"
+            onChange={(e) => handleInputChange("dob", e.target.value)}
             // value="1998-01-01"
             placeholder="1998-01-01"
           />
+          {errors.dob && (
+            <span style={{ color: "red", fontSize: "14px" }}>{errors.dob}</span>
+          )}
         </div>
       </div>
     </div>
