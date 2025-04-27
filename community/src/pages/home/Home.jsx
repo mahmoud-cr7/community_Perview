@@ -1,6 +1,7 @@
 import React from "react";
 import "./home.css";
-import LogoPng from "../../assets/logo.png";
+import vector from "../../assets/Vector.png";
+import aiPng from "../../assets/aiPng.png";
 import AhmedSaad from "../../assets/avatar.png";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,7 @@ const Home = () => {
     <div className="home">
       <div className="header container">
         <div className="logo">
-          <img src={LogoPng} alt="" />
+          <img src={aiPng} alt="" />
         </div>
         <div className="text">
           <h1>Tech Innovators</h1>
@@ -30,7 +31,10 @@ const Home = () => {
             </div>
             <div className="item">
               <span className="label">Sub Category :</span>
-              <span className="badge">AI</span>
+              <span className="badge ai-badge">
+                <img src={vector} alt="" className="vector" />
+                <span>AI</span>
+              </span>
             </div>
           </div>
 
